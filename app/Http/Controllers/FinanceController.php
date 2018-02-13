@@ -436,6 +436,17 @@ class FinanceController extends Controller
             'budget_plan_line_departments'));
     }
 
+    public function monitoring_preventive(){
+        //     $customer_lists = DB::table('res_partner')
+        //     ->select(
+        //         'res_partner.id',
+        //         'res_partner.name'
+        //     )
+        //     ->pluck('name', 'id');
+        // return $customer_lists;
+        return view('monitoring.monitoring_preventive', compact('customer_list'));
+    }
+
     private function _reportBudgetDeptDetailGetDeptName($datas, $budget_plan_request){
         $value = null;
         foreach ($datas as $data){
