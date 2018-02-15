@@ -145,6 +145,40 @@ class FinanceController extends Controller
         })->download('xls');
     }
 
+    //finance monitoring preventive
+    public function monitoring_preventive(Request $request){
+
+        $years      = $this->_get_ten_years();
+        $date_filter = '01/01/2018';
+
+
+        $customer_lists = DB::table('res_partner')
+        ->select(
+            'res_partner.id',
+            'res_partner.name'
+            )
+            ->pluck('name', 'id');
+		// return $customer_lists;
+
+		$project_area = DB::table('project_area')
+		->select(
+				'project_area.id',
+				'project_area.name'
+				)
+				->pluck('name', 'id');
+
+
+        return view('finance.monitoring_preventive',compact('years', 'project_data','project_area','customer_lists'));
+	}
+
+	//monitoring preventive detail
+	public function monitoring_preventive_detail(Request $request){
+
+
+		return view('finance.monitoring_preventive_detail');
+	}
+
+
     public function reportproject(Request $request){
         $years = $this->_get_ten_years();
         $site_types = $this->_get_site_types();
@@ -416,7 +450,7 @@ class FinanceController extends Controller
         $budget_plan_ids = null;
 
         foreach ($budget_plan_line_datas as $data){
-            $budget_plan_ids[] = $data->budget_plan_id;
+            $budget_plan_ids[$data->id] = $data->id;
         }
 
         $budget_plan_request = DB::table('budget_used_request')
@@ -436,16 +470,7 @@ class FinanceController extends Controller
             'budget_plan_line_departments'));
     }
 
-    public function monitoring_preventive(){
-        //     $customer_lists = DB::table('res_partner')
-        //     ->select(
-        //         'res_partner.id',
-        //         'res_partner.name'
-        //     )
-        //     ->pluck('name', 'id');
-        // return $customer_lists;
-        return view('monitoring.monitoring_preventive', compact('customer_list'));
-    }
+
 
     private function _reportBudgetDeptDetailGetDeptName($datas, $budget_plan_request){
         $value = null;

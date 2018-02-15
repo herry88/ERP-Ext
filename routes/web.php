@@ -17,6 +17,8 @@
 
 //Route::get('/', 'SiteController@index')->name('site');
 
+Route::get('/sale_order', 'SaleOrderController@index')->name('sale_order');
+
 Route::get('/site', 'SiteController@index')->name('site');
 Route::get('/site/dashboard', 'SiteController@dashboard')->name('site.dashboard');
 Route::get('/site/data', 'SiteController@index_data')->name('site.data');
@@ -25,6 +27,9 @@ Route::get('/site/export/{id}', 'SiteController@export')->name('site.export');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/dashboard/data', 'DashboardController@data')->name('dashboard.data');
+
+Route::get('/project/paket_project', 'ProjectController@project_batch')->name('project.project_batch');
+Route::get('/project/paket_project_detail/{packet_id}/{customer_id}', 'ProjectController@project_batch_detail')->name('project.project_batch_detail');
 
 Route::get('/', 'BudgetController@report')->name('site.report.budget');
 Route::get('/financial_report/budget', 'BudgetController@report')->name('site.report.budget');
@@ -43,4 +48,9 @@ Route::get('/finance/test', 'FinanceController@SampleTest');
 Route::get('/marketing', 'MarketingController@index')->name('marketing.index');
 
 Route::get('sales_order/detail/{tahun}','SalesOrderController@show');
+
+//Monitoring Preventive
+Route::get('/finance/monitoring_preventive', 'financeController@monitoring_preventive')->name('finance.monitoring_preventive');
+Route::get('/finance/monitoring_preventive_detail','financeController@monitoring_preventive_detail')->name('finance.monitoring_preventive_detail');
+
 
